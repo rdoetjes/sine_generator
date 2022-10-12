@@ -13,28 +13,21 @@ fn main() {
     let mut asm = File::create(format!("{}.s", label)).expect("Oops could not create file");
 
     println!("{}:", label);
-    asm.write(format!("{}:\n", label).as_bytes()).unwrap();
+    asm.write(format!("{}:", label).as_bytes()).unwrap();
     let mut b = 0;
     for i in 0..n {
         let m = i as f32 / n as f32 * (2.0 * std::f32::consts::PI);
         let p = f32::sin(m) * a;
 
-        if b==0{
-            print!("    dc.b {0}", p as i32);
+        if b == 0 || b % 8 == 0{
+            print!("\n    dc.b {0}", p as i32);
             asm.write(format!("    dc.b {0}, ", p as i32).as_bytes()).unwrap();
-            b+=1;
         }
-
-        if b > 0 && b <7 {
+        else {
             print!(", {0}", p as i32);
             asm.write(format!("{0}, ", p as i32).as_bytes()).unwrap();
-            b+=1;
         } 
 
-        if b == 7 {
-            println!(", {0}", p as i32);
-            asm.write(format!("{0} \n", p as i32).as_bytes()).unwrap();
-            b=0;
-        }
+        b+=1;
     }
 }
