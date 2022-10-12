@@ -15,3 +15,6 @@ It will create a file file called <label_name>.s
 it's a very straight forward 360 degree (2*pi) sine function.
 point = sin(i/nr_steps * (2.0 * pi)) where i is the current iteration going from 0 to nr_steps and nr_steps is the total number of points. This is the devisor for the 2*pi.
 So a one period (360 degree) sine is generated.
+
+**No file error handling**
+Because it's quick and dirty there's not real file error handling, everything is unwrapped for quickness sake.
