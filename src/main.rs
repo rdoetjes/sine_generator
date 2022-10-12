@@ -14,20 +14,20 @@ fn main() {
 
     println!("{}:", label);
     asm.write(format!("{}:", label).as_bytes()).unwrap();
-    let mut b = 0;
+
     for i in 0..n {
         let m = i as f32 / n as f32 * (2.0 * std::f32::consts::PI);
         let p = f32::sin(m) * a;
 
-        if b == 0 || b % 8 == 0{
-            print!("\n    dc.b {0}", p as i32);
-            asm.write(format!("    dc.b {0}, ", p as i32).as_bytes()).unwrap();
+        if i == 0 || i % 8 == 0{
+            let s = format!("\n    dc.b {0}", p as i32);
+            print!("{}", s);
+            asm.write(s.as_bytes()).unwrap();
         }
         else {
+            let s = format!(", {0}", p as i32);
             print!(", {0}", p as i32);
-            asm.write(format!("{0}, ", p as i32).as_bytes()).unwrap();
+            asm.write(s.as_bytes()).unwrap();
         } 
-
-        b+=1;
     }
 }
