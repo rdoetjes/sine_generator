@@ -20,19 +20,19 @@ fn main() {
         let p = f32::sin(m) * a;
 
         if b==0{
-            print!("    dc.b {0}, ", p as i32);
+            print!("    dc.b {0}", p as i32);
             asm.write(format!("    dc.b {0}, ", p as i32).as_bytes()).unwrap();
             b+=1;
         }
 
         if b > 0 && b <7 {
-            print!("{0}, ", p as i32);
+            print!(", {0}", p as i32);
             asm.write(format!("{0}, ", p as i32).as_bytes()).unwrap();
             b+=1;
         } 
 
         if b == 7 {
-            println!("{0} ", p as i32);
+            println!(", {0}", p as i32);
             asm.write(format!("{0} \n", p as i32).as_bytes()).unwrap();
             b=0;
         }
