@@ -1,6 +1,9 @@
-*Quick and dirty sine table generator of asm projects*
+#SINE_GENERATOR
 
-Creates a sine list botn on screen and in a file that you can import in your 68000 asm
+*A quick and dirty sine table generator of asm projects*
+I found myself always writing a couple of lines of code from scratch to generate a sine table list for a demo or jump arc, and I figured lets do it ONE LAST TIME and store it so I can reuse this.
+
+This program: creates a sine list both on screen and in a file that you can import in your 68000 asm
 
 Usage: sine_generator <label_name> <nr_of_steps> <amplitude_of_sine>
 -label_name is the label for the table and is also used as the filename

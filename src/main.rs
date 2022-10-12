@@ -3,7 +3,7 @@ use std::{process, fs::File, io::Write};
 fn main() {
     
     if std::env::args().len() != 4 {
-        println!("{0} <{1}> <{2}> <{3}>\n f.i: {0} sine 100 10", std::env::args().nth(0).expect(""), "label", "nr_steps", "sine_amplude");
+        println!("{0} <{1}> <{2}> <{3}>\n f.i: {0} sine 100 10", std::env::args().nth(0).expect(""), "label", "nr_steps", "sine_amplitude");
         process::exit(1);
     }
 
