@@ -30,4 +30,8 @@ fn main() {
             asm.write(s.as_bytes()).unwrap();
         } 
     }
+    let end = format!("\n{}_end:\n", label);
+    print!("{}",end);
+    asm.write(end.as_bytes()).unwrap();
+    
 }
