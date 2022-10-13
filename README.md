@@ -16,5 +16,25 @@ it's a very straight forward 360 degree (2*pi) sine function.
 point = sin(i/nr_steps * (2.0 * pi)) where i is the current iteration going from 0 to nr_steps and nr_steps is the total number of points. This is the devisor for the 2*pi.
 So a one period (360 degree) sine is generated.
 
+**output**
+As you can see we get a list that is started by our provided label (sine:), then a byte list you tend not to go over 255 in retro assembly (we had 225 lines in most cases) and since this is an offset that you add to the current position you'll be probably fine. Otherwise this code is easily extendable.
+And after the sie points we add a sine_end: label so that you can calculate the number of point (bytes) in your assembler by using sine_end-sine.
+
+sine:
+    dc.b 0, 1, 3, 5, 7, 9, 11, 12
+    dc.b 14, 16, 17, 19, 20, 21, 23, 24
+    dc.b 25, 26, 27, 27, 28, 29, 29, 29
+    dc.b 29, 30, 29, 29, 29, 29, 28, 27
+    dc.b 27, 26, 25, 24, 23, 21, 20, 19
+    dc.b 17, 16, 14, 12, 11, 9, 7, 5
+    dc.b 3, 1, 0, -1, -3, -5, -7, -9
+    dc.b -11, -12, -14, -16, -17, -19, -20, -21
+    dc.b -23, -24, -25, -26, -27, -27, -28, -29
+    dc.b -29, -29, -29, -30, -29, -29, -29, -29
+    dc.b -28, -27, -27, -26, -25, -24, -23, -21
+    dc.b -20, -19, -17, -16, -14, -12, -11, -9
+    dc.b -7, -5, -3, -1
+sine_end:
+
 **No file error handling**
 Because it's quick and dirty there's not real file error handling, everything is unwrapped for quickness sake.
