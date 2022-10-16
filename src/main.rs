@@ -77,6 +77,7 @@ impl SineApp{
         }
         self.code += "\nend";
         self.code += &self.asmlabel;
+        self.code += ":\n";
     }
 }
 
