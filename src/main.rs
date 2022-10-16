@@ -1,6 +1,9 @@
 //use std::{process, fs::File, io::Write};
 //Quick and dirty sine table generator of asm projecys
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] use std::fs::File;
+use std::io::Write;
+
+// hide console window on Windows in release
 use eframe::egui;
 use egui::{Vec2};
 use egui::plot::{Plot, PlotPoints, Points};
@@ -79,6 +82,12 @@ impl SineApp{
         self.code += &self.asmlabel;
         self.code += ":\n";
     }
+
+    pub fn save(&mut self){
+        let filename = format!("{}.s", self.asmlabel);
+        let mut f = File::create(filename).unwrap();
+        f.write_all(&self.code.as_bytes()).unwrap();
+    }
 }
 
 impl eframe::App for SineApp {
@@ -107,9 +116,9 @@ impl eframe::App for SineApp {
                 egui::ScrollArea::vertical().max_height(75.0).show(ui, |ui| {
                     ui.text_edit_multiline(&mut self.code);
                 });
-                let btn_export = ui.button("Export");
+                let btn_export = ui.button(format!("save as ./{}.s", self.asmlabel));
                 if btn_export.clicked(){
-
+                    self.save();
                 }
             });
         });
