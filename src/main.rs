@@ -3,7 +3,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 use eframe::egui;
 use egui::{Vec2};
-use egui::plot::{Line, Plot, PlotPoints};
+use egui::plot::{Plot, PlotPoints, Points};
 
 fn main() {
     let _options = eframe::NativeOptions {
@@ -90,7 +90,7 @@ impl eframe::App for SineApp {
             self.points.push(p as i16);
             [x, p as f64]        
         }).collect();
-        let line = Line::new(sin);
+        let points = Points::new(sin);
 
         self.to_code();
 
@@ -102,7 +102,7 @@ impl eframe::App for SineApp {
                 ui.label("n_points: ");
                 ui.add(egui::Slider::new(&mut self.npoints, 0..=255).text("# points"));
                 ui.add(egui::Slider::new(&mut self.amplitude, 0..=255).text("amplitude"));
-                Plot::new("sine").view_aspect(2.0).width(290.0).height(200.0).allow_drag(false).show(ui, |plot_ui| plot_ui.line(line));
+                Plot::new("sine").view_aspect(2.0).width(290.0).height(200.0).allow_drag(false).show(ui, |plot_ui| plot_ui.points(points));
                 egui::ScrollArea::vertical().max_height(75.0).show(ui, |ui| {
                     ui.text_edit_multiline(&mut self.code);
                 });
