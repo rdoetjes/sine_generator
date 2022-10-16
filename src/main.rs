@@ -13,7 +13,7 @@ fn main() {
         drag_and_drop_support: true,
         icon_data: None,
         initial_window_pos: None,
-        initial_window_size: Option::from(Vec2::new(300.0 as f32, 600.0 as f32)),
+        initial_window_size: Option::from(Vec2::new(300.0 as f32, 430 as f32)),
         min_window_size: None,
         max_window_size: None,
         resizable: true,
@@ -102,7 +102,7 @@ impl eframe::App for SineApp {
                 ui.label("n_points: ");
                 ui.add(egui::Slider::new(&mut self.npoints, 0..=255).text("# points"));
                 ui.add(egui::Slider::new(&mut self.amplitude, 0..=255).text("amplitude"));
-                Plot::new("sine").view_aspect(2.0).show(ui, |plot_ui| plot_ui.line(line));
+                Plot::new("sine").view_aspect(2.0).width(290.0).height(200.0).show(ui, |plot_ui| plot_ui.line(line));
                 egui::ScrollArea::vertical().max_height(75.0).show(ui, |ui| {
                     ui.text_edit_multiline(&mut self.code);
                 });
