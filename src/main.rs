@@ -2,7 +2,7 @@
 //Quick and dirty sine table generator of asm projecys
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 use eframe::egui;
-use egui::{Vec2, ScrollArea};
+use egui::{Vec2};
 use egui::plot::{Line, Plot, PlotPoints};
 
 fn main() {
