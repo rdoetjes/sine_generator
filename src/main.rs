@@ -34,7 +34,7 @@ fn main() {
     };
     
     eframe::run_native(
-        "Front end demo",
+        "Sine Table Generator",
         _options,
         Box::new(|_cc| Box::new(SineApp::default())),
     );
