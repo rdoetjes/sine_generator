@@ -1,4 +1,4 @@
-#SINE_GENERATOR
+# SINE_GENERATOR
 
 *A quick and dirty sine table generator of asm projects*
 I found myself always writing a couple of lines of code from scratch to generate a sine table list for a demo or jump arc, and I figured lets do it ONE LAST TIME and store it so I can reuse this.

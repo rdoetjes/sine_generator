@@ -131,7 +131,7 @@ impl eframe::App for SineApp {
                 egui::ScrollArea::vertical().max_height(75.0).show(ui, |ui| {
                     ui.text_edit_multiline(&mut self.code);
                 });
-                let btn_export = ui.button(format!("save as ./{}.s", self.asmlabel));
+                let btn_export = ui.button(format!("save as {}.s", self.asmlabel));
                 if btn_export.clicked(){
                     self.save();
                 }
