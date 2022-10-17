@@ -8,3 +8,9 @@ edition = "2021"
 [dependencies]
 egui = "0.19.0"
 eframe = "0.19.0"
+
+
+[profile.release]
+strip = true     #strip symbols from binary
+lto = true       #enable link time operation
+opt-level = "s"  #optimize for size 
