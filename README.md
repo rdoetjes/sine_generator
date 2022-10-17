@@ -4,7 +4,7 @@
 I found myself always writing a couple of lines of code from scratch to generate a sine table list for a demo or jump arc, and I figured lets do it ONE LAST TIME and store it so I can reuse this.
 
 This program: creates a sine list both on screen and in a file that you can import in your 68000, 6502 asm
-![alt text](https://github.com/rdoetjes/sine_generator/image.png?raw=true)
+![alt text](https://github.com/rdoetjes/sine_generator/blob/main/image.png?raw=true)
 
 **The math**
 it's a very straight forward 360 degree (2*pi) sine function.
