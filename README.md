@@ -6,7 +6,7 @@ I found myself always writing a couple of lines of code from scratch to generate
 This program: creates a sine list both on screen and in a file that you can import in your 68000, 6502 asm
 ![alt text](https://github.com/rdoetjes/sine_generator/blob/main/image.png?raw=true)
 
-**GUI requirements**
+## GUI requirements ##
 The UI is build with egui and compiles without any additional libraries on Windows and Mac.<br/>
 <br/>
 On Linux the following libs should be installed.
@@ -18,12 +18,12 @@ On Fedora Rawhide you need to run:
 dnf install clang clang-devel clang-tools-extra speech-dispatcher-devel libxkbcommon-devel pkg-config openssl-devel libxcb-devel
 ```
 
-**The math**
+## The math ##
 it's a very straight forward 360 degree (2*pi) sine function.
 point = sin(i/nr_steps * (2.0 * pi)) where i is the current iteration going from 0 to nr_steps and nr_steps is the total number of points. This is the devisor for the 2*pi.
 So a one period (360 degree) sine is generated.
 
-**output**
+## Output ##
 As you can see we get a list that is started by our provided label (sine:), then a byte list you tend not to go over 255 in retro assembly (we had 225 lines in most cases) and since this is an offset that you add to the current position you'll be probably fine. Otherwise this code is easily extendable.
 And after the sie points we add a sine_end: label so that you can calculate the number of point (bytes) in your assembler by using sine_end-sine.
 
@@ -44,7 +44,13 @@ sine:
     dc.b -7, -5, -3, -1
 sine_end:
 ```
-You can copy the data from the textedit or click on the button which will save the file the asmlabelname.s in the current directory.
+You can copy the data from the text edit field and put it into your asm project, or click on the button which will save the file the asmlabelname.s in the current directory.
 
-**No file error handling**
-Because it's quick and dirty there's not real file error handling, everything is unwrapped for quickness sake.
+## No file error handling ##
+Because it's quick and dirty there's not real file error handling, everything is unwrapped for quickness sake. And a file will be created and overwritten whether it already exists or not. This is something I use quiet a lot to quickly overwrite an existing table and rerunning the vasm project to get quick feed back.
+
+## To do ##
+- I want to add a second sine that is added to the 1 period sine so get some modulation
+- I want to add the option to toggle between a whole period sine or half a period (ideal for jump cycle)
+These will get added when I eventually need them in my asm project.
+
