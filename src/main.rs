@@ -93,8 +93,9 @@ impl SineApp{
             let x = i as f64;
             let m = i as f32 / self.npoints as f32 * (2.0 * std::f32::consts::PI);
             let p = f32::sin(m) * self.amplitude as f32;
-            self.points.push(p as i8);
-            [x, p as f64]        
+            let r = p as i8;
+            self.points.push(r);
+            [x, r as f64]        
         }).collect();
         Points::new(sin)
     }
