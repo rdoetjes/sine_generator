@@ -2,6 +2,7 @@
 
 *A quick and dirty sine table generator of asm projects*
 I found myself always writing a couple of lines of code from scratch to generate a sine table list for a demo or jump arc, and I figured lets do it ONE LAST TIME and store it so I can reuse this.
+The application will actually plot the resulting sine table with as an 8bit integer. This way, you can see where it clips and how rough or smooth the path is. This in the past commandline tools, meant reading of valus and trial and error.
 
 This program: creates a sine list both on screen and in a file that you can import in your 68000, 6502 asm
 ![alt text](https://github.com/rdoetjes/sine_generator/blob/main/image.png?raw=true)
