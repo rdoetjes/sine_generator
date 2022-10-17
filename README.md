@@ -6,6 +6,17 @@ I found myself always writing a couple of lines of code from scratch to generate
 This program: creates a sine list both on screen and in a file that you can import in your 68000, 6502 asm
 ![alt text](https://github.com/rdoetjes/sine_generator/blob/main/image.png?raw=true)
 
+**ui**
+The UI is based build with egui and compiles on Windows and Mac without any additional libaries.
+On Linux the following libs should be installed.
+```shell
+sudo apt-get install -y libclang-dev libgtk-3-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev
+```
+On Fedora Rawhide you need to run:
+```shell
+dnf install clang clang-devel clang-tools-extra speech-dispatcher-devel libxkbcommon-devel pkg-config openssl-devel libxcb-devel
+```
+
 **The math**
 it's a very straight forward 360 degree (2*pi) sine function.
 point = sin(i/nr_steps * (2.0 * pi)) where i is the current iteration going from 0 to nr_steps and nr_steps is the total number of points. This is the devisor for the 2*pi.
