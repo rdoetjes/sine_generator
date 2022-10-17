@@ -16,7 +16,7 @@ fn main() {
         drag_and_drop_support: true,
         icon_data: None,
         initial_window_pos: None,
-        initial_window_size: Option::from(Vec2::new(300.0 as f32, 430 as f32)),
+        initial_window_size: Option::from(Vec2::new(300.0 as f32, 450 as f32)),
         min_window_size: None,
         max_window_size: None,
         resizable: true,
@@ -45,6 +45,8 @@ struct SineApp {
     amplitude: u8,
     npoints: u16,
     points: Vec<i16>,
+    time_50hz: f32,
+    time_60hz: f32,
     code: String,
 }
 
@@ -55,7 +57,9 @@ impl Default for SineApp {
             npoints: 0,
             amplitude: 30,
             points: vec![], 
-            code: "".to_owned(),           
+            time_50hz: 0.0, 
+            time_60hz: 0.0, 
+            code: "".to_owned(),      
         }
     }
 }
@@ -83,6 +87,25 @@ impl SineApp{
         self.code += ":\n";
     }
 
+    pub fn calc_sine(&mut self) -> Points{
+        self.points.clear();
+        let sin: PlotPoints = (0..self.npoints).map(|i| {
+            let x = i as f64;
+            let m = i as f32 / self.npoints as f32 * (2.0 * std::f32::consts::PI);
+            let p = f32::sin(m) * self.amplitude as f32;
+            self.points.push(p as i16);
+            [x, p as f64]        
+        }).collect();
+        Points::new(sin)
+    }
+
+    pub fn calc_all(&mut self) -> Points{
+        self.time_50hz = self.npoints as f32 * 0.02;
+        self.time_60hz = self.npoints as f32 * 0.01666666;
+        self.to_code();
+        self.calc_sine()
+    }
+
     pub fn save(&mut self){
         let filename = format!("{}.s", self.asmlabel);
         let mut f = File::create(filename).unwrap();
@@ -92,17 +115,8 @@ impl SineApp{
 
 impl eframe::App for SineApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        self.points.clear();
-        let sin: PlotPoints = (0..self.npoints).map(|i| {
-            let x = i as f64;
-            let m = i as f32 / self.npoints as f32 * (2.0 * std::f32::consts::PI);
-            let p = f32::sin(m) * self.amplitude as f32;
-            self.points.push(p as i16);
-            [x, p as f64]        
-        }).collect();
-        let points = Points::new(sin);
-
-        self.to_code();
+        
+        let points = self.calc_all();
 
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("Sine creator");
@@ -112,6 +126,7 @@ impl eframe::App for SineApp {
                 ui.label("n_points: ");
                 ui.add(egui::Slider::new(&mut self.npoints, 0..=255).text("# points"));
                 ui.add(egui::Slider::new(&mut self.amplitude, 0..=255).text("amplitude"));
+                ui.label(format!("{:.4} seconds at 50hz, {:.4} seconds at 60hz", self.time_50hz.to_string(),  self.time_60hz.to_string()));
                 Plot::new("sine").view_aspect(2.0).width(290.0).height(200.0).allow_drag(false).show(ui, |plot_ui| plot_ui.points(points));
                 egui::ScrollArea::vertical().max_height(75.0).show(ui, |ui| {
                     ui.text_edit_multiline(&mut self.code);
