@@ -44,7 +44,7 @@ struct SineApp {
     asmlabel: String,
     amplitude: u8,
     npoints: u16,
-    points: Vec<i16>,
+    points: Vec<i8>,
     time_50hz: f32,
     time_60hz: f32,
     code: String,
@@ -93,7 +93,7 @@ impl SineApp{
             let x = i as f64;
             let m = i as f32 / self.npoints as f32 * (2.0 * std::f32::consts::PI);
             let p = f32::sin(m) * self.amplitude as f32;
-            self.points.push(p as i16);
+            self.points.push(p as i8);
             [x, p as f64]        
         }).collect();
         Points::new(sin)
