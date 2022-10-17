@@ -26,6 +26,7 @@ So a one period (360 degree) sine is generated.
 As you can see we get a list that is started by our provided label (sine:), then a byte list you tend not to go over 255 in retro assembly (we had 225 lines in most cases) and since this is an offset that you add to the current position you'll be probably fine. Otherwise this code is easily extendable.
 And after the sie points we add a sine_end: label so that you can calculate the number of point (bytes) in your assembler by using sine_end-sine.
 
+```asm
 sine:
     dc.b 0, 1, 3, 5, 7, 9, 11, 12
     dc.b 14, 16, 17, 19, 20, 21, 23, 24
@@ -41,7 +42,7 @@ sine:
     dc.b -20, -19, -17, -16, -14, -12, -11, -9
     dc.b -7, -5, -3, -1
 sine_end:
-
+```
 You can copy the data from the textedit or click on the button which will save the file the asmlabelname.s in the current directory.
 
 **No file error handling**
