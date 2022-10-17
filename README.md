@@ -6,8 +6,9 @@ I found myself always writing a couple of lines of code from scratch to generate
 This program: creates a sine list both on screen and in a file that you can import in your 68000, 6502 asm
 ![alt text](https://github.com/rdoetjes/sine_generator/blob/main/image.png?raw=true)
 
-**ui**
-The UI is based build with egui and compiles on Windows and Mac without any additional libaries.
+**GUI requirements**
+The UI is build with egui and compiles without any additional libraries on Windows and Mac.<br/>
+<br/>
 On Linux the following libs should be installed.
 ```shell
 sudo apt-get install -y libclang-dev libgtk-3-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libspeechd-dev libxkbcommon-dev libssl-dev
